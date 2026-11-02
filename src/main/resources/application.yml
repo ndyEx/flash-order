@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: flash-order
+  jackson:
+    deserialization:
+      accept-float-as-int: false
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:flashorder}
+    username: ${DB_USERNAME:flashorder}
+    password: ${DB_PASSWORD:flashorder}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
