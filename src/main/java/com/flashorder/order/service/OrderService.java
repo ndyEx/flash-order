@@ -23,7 +23,8 @@ public class OrderService {
 
     @Transactional
     public OrderResponse create(CreateOrderRequest request) {
-        Product product = productRepository.findById(request.productId())
+        // 잠금 획득 후 읽은 재고로 검사하며, 주문 저장과 commit/rollback까지 잠금을 유지합니다.
+        Product product = productRepository.findByIdForUpdate(request.productId())
                 .orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND, "PRODUCT_NOT_FOUND", "상품을 찾을 수 없습니다."));
         Order order = Order.place(product, request.quantity());
         return OrderResponse.from(orderRepository.saveAndFlush(order));

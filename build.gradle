@@ -5,7 +5,7 @@ plugins {
 
 group = 'com.flashorder'
 version = '0.0.1-SNAPSHOT'
-description = 'FlashOrder V1'
+description = 'FlashOrder V2 - PostgreSQL pessimistic locking'
 
 java {
     toolchain {
@@ -30,6 +30,9 @@ dependencies {
     runtimeOnly 'org.flywaydb:flyway-database-postgresql'
     runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation platform('org.testcontainers:testcontainers-bom:2.0.5')
+    testImplementation 'org.testcontainers:testcontainers-postgresql'
+    testImplementation 'org.testcontainers:testcontainers-junit-jupiter'
     testRuntimeOnly 'com.h2database:h2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
